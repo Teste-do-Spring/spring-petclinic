@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.product;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.Collection;
 
-import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.repository.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Juergen Hoeller
- *         Can be Cat, Dog, Hamster...
- */
-@Entity
-@Table(name = "types")
-public class PetType extends NamedEntity {
+public interface ProductRepository extends 
+	Repository<Product, Integer> {
+
+    @Transactional(readOnly = true)
+    Collection<Product> findAll() throws DataAccessException;
 
 }
